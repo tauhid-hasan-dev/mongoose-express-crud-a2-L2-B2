@@ -28,7 +28,7 @@ const UserSchema = new Schema<TUser>({
   password: {
     type: String,
     required: [true, 'Password is required'],
-    maxlength: [20, 'password can not be more than 20 character'],
+    maxlength: [20, 'Password can not be more than 20 character'],
   },
   fullName: {
     type: userFullNameSchema,
