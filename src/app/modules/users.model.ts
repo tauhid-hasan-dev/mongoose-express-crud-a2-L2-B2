@@ -25,6 +25,11 @@ const addressSchema = new Schema<TAddress>({
 const UserSchema = new Schema<TUser>({
   userId: { type: Number, required: [true, 'User ID field is required'] },
   username: { type: String, required: [true, 'Username field is required'] },
+  password: {
+    type: String,
+    required: [true, 'Password is required'],
+    maxlength: [20, 'password can not be more than 20 character'],
+  },
   fullName: {
     type: userFullNameSchema,
     required: [true, 'Full Name field is required'],
