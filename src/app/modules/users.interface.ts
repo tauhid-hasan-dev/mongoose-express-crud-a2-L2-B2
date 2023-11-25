@@ -12,7 +12,7 @@ export type TAddress = {
 export type TUser = {
   userId: number;
   username: string;
-  password: string;
+  password: string | undefined;
   fullName: TFullName;
   age: number;
   email: string;

@@ -37,6 +37,7 @@ const UserSchema = new Schema<TUser>({
   },
   password: {
     type: String,
+    default: undefined,
     required: [true, 'Password is required'],
     maxlength: [20, 'Password can not be more than 20 character'],
   },
@@ -63,9 +64,14 @@ UserSchema.pre('save', async function (next) {
   // eslint-disable-next-line @typescript-eslint/no-this-alias
   const user = this;
   user.password = await bcrypt.hash(
-    user.password,
+    user.password || '',
     Number(config.bcrypt_salt_rounds),
   );
+  next();
+});
+
+UserSchema.post('save', function (doc, next) {
+  doc.password = undefined;
   next();
 });
 
