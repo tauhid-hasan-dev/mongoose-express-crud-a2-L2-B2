@@ -23,8 +23,16 @@ const addressSchema = new Schema<TAddress>({
 });
 
 const UserSchema = new Schema<TUser>({
-  userId: { type: Number, required: [true, 'User ID field is required'] },
-  username: { type: String, required: [true, 'Username field is required'] },
+  userId: {
+    type: Number,
+    required: [true, 'User ID field is required'],
+    unique: true,
+  },
+  username: {
+    type: String,
+    required: [true, 'Username field is required'],
+    unique: true,
+  },
   password: {
     type: String,
     required: [true, 'Password is required'],
@@ -35,7 +43,7 @@ const UserSchema = new Schema<TUser>({
     required: [true, 'Full Name field is required'],
   },
   age: { type: Number, required: [true, 'Age field is required'] },
-  email: { type: String, required: [true, 'Email field is required'] },
+  email: { type: String, required: [true, 'Email field is required'], unique: true, },
   isActive: { type: Boolean, required: [true, 'isActive field is required'] },
   hobbies: [{ type: String }],
   address: {
