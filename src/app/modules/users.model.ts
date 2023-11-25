@@ -70,6 +70,7 @@ UserSchema.pre('save', async function (next) {
   next();
 });
 
+// password is not included in the response
 UserSchema.post('save', function (doc, next) {
   doc.password = undefined;
   next();
