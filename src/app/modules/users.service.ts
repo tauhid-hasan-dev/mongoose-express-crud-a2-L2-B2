@@ -7,7 +7,10 @@ const createSingleUser = async (data: TUser) => {
 };
 
 const getAllUser = async () => {
-  const users = await UserModel.find();
+  const users = await UserModel.find(
+    {},
+    { username: 1, fullName: 1, age: 1, email: 1, address: 1 },
+  );
   return users;
 };
 
