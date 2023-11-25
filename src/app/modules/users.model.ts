@@ -1,5 +1,7 @@
 import { Schema, model } from 'mongoose';
 import { TAddress, TFullName, TUser } from './users.interface';
+import config from '../config';
+import bcrypt from 'bcrypt';
 
 const userFullNameSchema = new Schema<TFullName>({
   firstName: {
@@ -43,13 +45,28 @@ const UserSchema = new Schema<TUser>({
     required: [true, 'Full Name field is required'],
   },
   age: { type: Number, required: [true, 'Age field is required'] },
-  email: { type: String, required: [true, 'Email field is required'], unique: true, },
+  email: {
+    type: String,
+    required: [true, 'Email field is required'],
+    unique: true,
+  },
   isActive: { type: Boolean, required: [true, 'isActive field is required'] },
   hobbies: [{ type: String }],
   address: {
     type: addressSchema,
     required: [true, 'Address field is required'],
   },
+});
+
+// pre save middleware for hashing password
+UserSchema.pre('save', async function (next) {
+  // eslint-disable-next-line @typescript-eslint/no-this-alias
+  const user = this;
+  user.password = await bcrypt.hash(
+    user.password,
+    Number(config.bcrypt_salt_rounds),
+  );
+  next();
 });
 
 const UserModel = model<TUser>('User', UserSchema);
