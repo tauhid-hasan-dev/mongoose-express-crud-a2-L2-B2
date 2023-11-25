@@ -1,9 +1,9 @@
-type TFullName = {
+export type TFullName = {
   firstName: string;
   lastName: string;
 };
 
-type TAddress = {
+export type TAddress = {
     street: string;
     city: string;
     country: string;
