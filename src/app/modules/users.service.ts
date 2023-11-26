@@ -15,9 +15,10 @@ const getAllUser = async () => {
 };
 
 const getSingleUser = async (id: string) => {
-  console.log(id);
-  const user = await UserModel.findOne({ userId: id });
-  console.log(user);
+  let user = null;
+  if (await UserModel.isUserExists(id)) {
+    user = await UserModel.findOne({ userId: id }, { password: 0 });
+  }
   return user;
 };
 

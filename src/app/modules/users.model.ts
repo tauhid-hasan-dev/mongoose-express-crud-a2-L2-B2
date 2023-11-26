@@ -1,5 +1,5 @@
 import { Schema, model } from 'mongoose';
-import { TAddress, TFullName, TUser } from './users.interface';
+import { TAddress, TFullName, TUser, UserModelStatic } from './users.interface';
 import config from '../config';
 import bcrypt from 'bcrypt';
 
@@ -24,7 +24,7 @@ const addressSchema = new Schema<TAddress>({
   country: { type: String, required: true },
 });
 
-const UserSchema = new Schema<TUser>({
+const UserSchema = new Schema<TUser, UserModelStatic>({
   userId: {
     type: Number,
     required: [true, 'User ID field is required'],
@@ -76,6 +76,14 @@ UserSchema.post('save', function (doc, next) {
   next();
 });
 
-const UserModel = model<TUser>('User', UserSchema);
+//this is static method for checking if user is exists or not
+UserSchema.statics.isUserExists = async function (id: string) {
+  console.log(id);
+  const existingUser = await UserModel.findOne({ userId: id });
+  console.log({ existingUser });
+  return existingUser;
+};
+
+const UserModel = model<TUser, UserModelStatic>('User', UserSchema);
 
 export default UserModel;

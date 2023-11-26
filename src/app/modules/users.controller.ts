@@ -6,7 +6,6 @@ const createUser = async (req: Request, res: Response) => {
     const { user } = req.body;
 
     const result = await userServices.createSingleUser(user);
-    
 
     res.status(200).json({
       success: true,
@@ -43,7 +42,9 @@ const getAllUser = async (req: Request, res: Response) => {
 const getSingleUser = async (req: Request, res: Response) => {
   try {
     const { userId } = req.params;
+
     const result = await userServices.getSingleUser(userId);
+    console.log({ result });
 
     if (result) {
       res.status(200).json({
@@ -51,7 +52,7 @@ const getSingleUser = async (req: Request, res: Response) => {
         message: 'User fetched successfully!',
         data: result,
       });
-    } else {
+    } else if (result === null) {
       res.json({
         success: false,
         message: 'User not found',
