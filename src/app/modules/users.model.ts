@@ -78,9 +78,7 @@ UserSchema.post('save', function (doc, next) {
 
 //this is static method for checking if user is exists or not
 UserSchema.statics.isUserExists = async function (id: string) {
-  console.log(id);
   const existingUser = await UserModel.findOne({ userId: id });
-  console.log({ existingUser });
   return existingUser;
 };
 

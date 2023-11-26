@@ -44,7 +44,6 @@ const getSingleUser = async (req: Request, res: Response) => {
     const { userId } = req.params;
 
     const result = await userServices.getSingleUser(userId);
-    console.log({ result });
 
     if (result) {
       res.status(200).json({
