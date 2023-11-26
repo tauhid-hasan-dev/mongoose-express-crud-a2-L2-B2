@@ -22,8 +22,17 @@ const getSingleUser = async (id: string) => {
   return user;
 };
 
+const updateSingleUser = async (id: string, data: TUser) => {
+  let user = null;
+  if (await UserModel.isUserExists(id)) {
+    user = await UserModel.updateOne({ userId: id }, { $set: data });
+  }
+  return user;
+};
+
 export const userServices = {
   createSingleUser,
   getAllUser,
   getSingleUser,
+  updateSingleUser,
 };
