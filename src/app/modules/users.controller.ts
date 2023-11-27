@@ -77,7 +77,8 @@ const updateUser = async (req: Request, res: Response) => {
   try {
     const { userId } = req.params;
     const user = req.body;
-    const result = await userServices.updateSingleUser(userId, user);
+    const zodParsedData = UserValidationSchema.parse(user);
+    const result = await userServices.updateSingleUser(userId, zodParsedData);
 
     if (result) {
       res.status(200).json({
@@ -133,7 +134,6 @@ const deleteUser = async (req: Request, res: Response) => {
     });
   }
 };
-
 
 //!================  BONUST PART ======================
 
