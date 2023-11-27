@@ -38,6 +38,8 @@ const deleteSingleUser = async (id: string) => {
   return user;
 };
 
+//!--------- BONUS PART-----------------
+
 const addProductIntoOrder = async (id: string, data: TOrder) => {
   let user = null;
   if (await UserModel.isUserExists(id)) {
