@@ -1,6 +1,6 @@
 # Mongoose Express CRUD Mastery - Tauhid Hasan
 
-### Live Link:
+### Live Link: https://mongoose-express-a2-l2-b2.vercel.app/
 
 ---
 
