@@ -62,6 +62,25 @@ const getAllProductFromOrder = async (id: string) => {
   return orders;
 };
 
+const calculateProductPrices = async (id: string) => {
+  let totalPrice = null;
+  if (await UserModel.isUserExists(id)) {
+    totalPrice = await UserModel.aggregate([
+      {
+        $unwind: '$orders',
+      },
+      {
+        $group: {
+          _id: null,
+          totalPrice: { $sum: '$orders.price' },
+        },
+      },
+    ]);
+  }
+  console.log({ totalPrice });
+  return totalPrice;
+};
+
 export const userServices = {
   createSingleUser,
   getAllUser,
@@ -70,4 +89,5 @@ export const userServices = {
   deleteSingleUser,
   addProductIntoOrder,
   getAllProductFromOrder,
+  calculateProductPrices,
 };
