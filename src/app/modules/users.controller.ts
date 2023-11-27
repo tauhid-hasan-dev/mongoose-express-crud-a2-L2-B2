@@ -146,8 +146,8 @@ const addProductIntoOrder = async (req: Request, res: Response) => {
     if (result) {
       res.status(200).json({
         success: true,
-        message: 'User updated successfully!',
-        data: result,
+        message: 'Order created successfully!',
+        data: null,
       });
     } else if (result === null) {
       res.json({
