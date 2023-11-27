@@ -6,16 +6,19 @@
 
 ### Run this project locally:
 
-Clone The Repo
+- Clone The Repo
 
+```
+git clone https://github.com/tauhid-hasan-dev/mongoose-express-crud-a2-L2-B2
+```
+
+- Install Node Modules
 ```
 npm install
-
 ```
-
+- Start the project locally
 ```
 npm run start:dev
-
 ```
 
 ---
