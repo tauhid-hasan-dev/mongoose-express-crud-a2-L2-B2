@@ -24,6 +24,21 @@ const addressSchema = new Schema<TAddress>({
   country: { type: String, required: true },
 });
 
+const OrderSchema = new Schema({
+  productName: {
+    type: String,
+    required: [true, 'Product name is required'],
+  },
+  price: {
+    type: Number,
+    required: [true, 'Price is required'],
+  },
+  quantity: {
+    type: Number,
+    required: [true, 'Quantity is required'],
+  },
+});
+
 const UserSchema = new Schema<TUser, UserModelStatic>({
   userId: {
     type: Number,
@@ -56,6 +71,10 @@ const UserSchema = new Schema<TUser, UserModelStatic>({
   address: {
     type: addressSchema,
     required: [true, 'Address field is required'],
+  },
+  orders: {
+    type: [OrderSchema],
+    required: false,
   },
 });
 

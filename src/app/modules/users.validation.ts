@@ -1,14 +1,7 @@
 import { z } from 'zod';
 
-// Define sub-schemas for reusability
 const UserFullNameSchema = z.object({
-  firstName: z
-    .string()
-    .min(1)
-    .max(20)
-    .refine((value) => /^[A-Z]/.test(value), {
-      message: 'First Name must start with a capital letter',
-    }),
+  firstName: z.string().min(1).max(20),
   lastName: z.string().min(1).max(20),
 });
 
@@ -18,17 +11,23 @@ const AddressSchema = z.object({
   country: z.string(),
 });
 
-// Define the main User schema
+const OrderSchema = z.object({
+  productName: z.string().min(1),
+  price: z.number().min(0),
+  quantity: z.number().min(1),
+});
+
 const UserValidationSchema = z.object({
-  userId: z.number(),
-  username: z.string(),
-  password: z.string().max(20),
+  userId: z.number().int(),
+  username: z.string().min(1),
+  password: z.string().min(1).max(20),
   fullName: UserFullNameSchema,
-  age: z.number(),
+  age: z.number().int().min(0),
   email: z.string().email(),
   isActive: z.boolean(),
   hobbies: z.array(z.string()),
   address: AddressSchema,
+  orders: z.array(OrderSchema).optional(),
 });
 
 export { UserValidationSchema };
