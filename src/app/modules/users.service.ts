@@ -54,6 +54,14 @@ const addProductIntoOrder = async (id: string, data: TOrder) => {
   return user;
 };
 
+const getAllProductFromOrder = async (id: string) => {
+  let orders = null;
+  if (await UserModel.isUserExists(id)) {
+    orders = await UserModel.findOne({ userId: id }, 'orders');
+  }
+  return orders;
+};
+
 export const userServices = {
   createSingleUser,
   getAllUser,
@@ -61,4 +69,5 @@ export const userServices = {
   updateSingleUser,
   deleteSingleUser,
   addProductIntoOrder,
+  getAllProductFromOrder,
 };
