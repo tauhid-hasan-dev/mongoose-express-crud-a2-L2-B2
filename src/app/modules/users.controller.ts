@@ -4,8 +4,9 @@ import { UserValidationSchema } from './users.validation';
 
 const createUser = async (req: Request, res: Response) => {
   try {
-    const { user: userdata } = req.body;
-    const zodParsedData = UserValidationSchema.parse(userdata);
+    const user = req.body;
+
+    const zodParsedData = UserValidationSchema.parse(user);
 
     const result = await userServices.createSingleUser(zodParsedData);
 
